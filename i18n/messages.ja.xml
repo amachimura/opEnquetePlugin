@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file orginal="global" source-language="en" datatype="plaintext">
+    <body>
+      <trans-unit id="">
+        <source>Title</source>
+        <target>タイトル</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Is publicity</source>
+        <target>公開設定</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Max answers</source>
+        <target>最大回答数</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Full answer action</source>
+        <target>最大回答数に達したとき</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Is take comment</source>
+        <target>コメントを受け付けるか</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Is show counter</source>
+        <target>回答数を公開するか</target>
+      </trans-unit>
+      <trans-unit id="">
+        <source>Thanks message</source>
+        <target>回答完了時のメッセージ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

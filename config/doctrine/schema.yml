@@ -1,0 +1,57 @@
+options:
+  charset: utf8
+
+Enquete:
+  actAs: [Timestampable]
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true, comment: "アンケートID" }
+    community_id: { type: integer(4), notnull: true, comment: "コミュニティID" }
+    member_id: { type: integer(4), comment: "アンケート作成メンバーID" }
+    title: { type: string, notnull: true, comment: "アンケートタイトル" }
+    description: { type: string, comment: "アンケート説明" }
+    is_publicity: { type: boolean, notnull: true, comment: "アンケート結果の公開設定。公開しない場合は作成者のみ閲覧可能。" }
+    max_answers: { type: tinyint, notnull: true, comment: "アンケートの最大回答数。0の場合は制限なし。" }
+    full_answer_action: { type: boolean, notnull: true, comment: "アンケートの回答が最大数に達したときの挙動。回答の受付を停止するか古いものから削除するか。" }
+    is_take_comment: { type: boolean, notnull: true, comment: "コメントを受け付けるか。" }
+    is_show_counter: { type: boolean, notnull: true, comment: "アンケート回答数を公開するか。" }
+    thanks_message: { type: string, comment: "回答完了時のメッセージ" }
+  relations:
+    Community: { foreign: id, onDelete: cascade }
+    Member: { foreign: id, onDelete: set null }
+
+EnqueteComment:
+  actAs: [Timestampable]
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true, comment: "アンケートコメントID" }
+    enquete_id: { type: integer(4), notnull: true, comment: "アンケートID" }
+    member_id: { type: integer(4), comment: "コメントを書いたメンバーID" }
+    number: { type: integer(4), notnull: true, default: 0, comment: "コメント番号" }
+    body: { type: string, notnull: true, comment: "コメント" }
+  relations:
+    Enquete: { foreign: id, onDelete: cascade }
+    Member: { foreign: id, onDelete: set null }
+
+EnqueteQuestion:
+  actAs: [Timestampable]
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true, comment: "アンケート質問ID" }
+    enquete_id: { type: integer(4), notnull: true, comment: "アンケートID" }
+    type: { type: tinyint, notnull: true, comment: "質問タイプ。1:ラジオボタン、2:チェックボックス、3:セレクトボックス、4:テキストフィールド、5:テキストエリア、6:年月日、7:メールアドレス、8:URL" }
+    description: { type: string, notnull: true, comment: "質問内容。" }
+    label: { type: string, comment: "選択肢のラベル。または初期値。" }
+    is_default: { type: boolean, notnull: true, comment: "初期選択値かどうか" }
+    sort_order: { type: integer(4), comment: "表示順" }
+  relations:
+    Enquete: { foreign: id, onDelete: cascade }
+
+EnqueteAnswer:
+  actAs: [Timestampable]
+  columns:
+    id: { type: integer(4), primary: true, autoincrement: true, comment: "アンケート回答ID" }
+    enquete_id: { type: integer(4), notnull: true, comment: "アンケートID" }
+    enquete_question_id: { type: integer(4), notnull: true, comment: "アンケート質問ID" }
+    answer: { type: string, notnull: true, comment: "アンケート回答" }
+  relations:
+    Enquete: { foreign: id, onDelete: cascade }
+    EnqueteQuestion: { foreign: id, onDelete: cascade }
+    

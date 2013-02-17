@@ -1,0 +1,7 @@
+homeSuccess:
+  customize:
+    enqueteList:
+      template: [enquete, enqueteList]
+      parts: [communityHome]
+      target: [lastRow]
+      is_component: true
